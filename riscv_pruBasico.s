@@ -15,27 +15,49 @@ str_ok: .string "Success ;)"
 str_FL: .string "Failure!!!"
 
 .text
-main:    la   t0, buffer          # carga la drecci�n del buffer en t0 (X5)
-	 #lui  t0, %hi(buffer)    # Carga la parte alta de la dir buffer
-	 #addi t0, t0, %lo(buffer)
+main:#    la   t0, buffer      	# carga la drecci?n del buffer en t0 (X5)
+	 lui  t0, %hi(buffer)    	# Carga la parte alta de la dir buffer
+     nop
+     nop
+	 addi t0, t0, %lo(buffer)
 	 li   t1, 8               # x6 = 8
+	 nop
+	 nop
   	 sw   t1, 0(t0)           # buff[0] = x6
 	 lw   t2, 0(t0)           # x7 = buff[0]
+	 nop
+	 nop
 	 bne  t1, t2, failure     # if x6 /= x7 fallo
+	 nop
 pru2:
 	 li   t3, 56              # x28 = 56
+	 nop
+	 nop
 	 sw   t3, 4(t0)
 	 addi t0, t0, 4
+	 nop
+	 nop
 	 lw   t4, 0(t0)
+	 nop
+	 nop
 pru3:
 	 bne  t3, t4, failure
+	 nop
 	 lw   t5, -4(t0)
+	 nop
+	 nop
 	 bne  t5, t1, failure
+	 nop
 	 li   t1, 0xFF00F007      # x6 = 0xFF00F007
 	 li   t2, 0xFF            # x7 = FF
+	 nop
+	 nop
 	 and  t1, t1, t2          # x6 debe quedar 7
 	 li   t3, 7
+	 nop
+	 nop
 	 bne  t1, t3, failure
+	 nop
 pru4:
 	 li   t2, 0xFFF           # x7 = FFF
 	 not  t2, t2              # x7 = FFFF_F000
